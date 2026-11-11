@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pecantojos · Administración</title>
+  <link rel="icon" href="/img/logo.svg">
+  <link rel="manifest" href="/admin.webmanifest">
+  <meta name="theme-color" content="#4A2A17">
+  <link rel="apple-touch-icon" href="/img/icons/admin-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Pecantojos Admin">
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <!-- ===== Inicio de sesión ===== -->
+  <div class="login-admin" id="vistaLogin">
+    <form class="tarjeta" id="formLoginAdmin">
+      <div class="marca" style="justify-content:center;margin-bottom:1rem"><img src="/img/logo.svg" alt="">Pecantojos</div>
+      <h2 style="text-align:center">Panel administrativo</h2>
+      <div id="avisoLoginAdmin"></div>
+      <div class="campo"><label for="aUsuario">Usuario</label><input id="aUsuario" name="usuario" autocomplete="username" required></div>
+      <div class="campo"><label for="aPass">Contraseña</label><input id="aPass" name="password" type="password" autocomplete="current-password" required></div>
+      <button class="btn bloque" type="submit">Ingresar</button>
+      <p class="chico muted" style="text-align:center"><a href="/">Volver a la tienda</a></p>
+    </form>
+  </div>
+
+  <!-- ===== Panel ===== -->
+  <div class="admin oculto" id="vistaPanel">
+    <nav class="lateral" aria-label="Módulos">
+      <div class="marca"><img src="/img/logo.svg" alt="">Pecantojos</div>
+      <button data-modulo="resumen" class="activo">📊 Resumen</button>
+      <button data-modulo="pedidos">🧾 Pedidos <span class="badge oculto" id="bPedidos"></span></button>
+      <button data-modulo="calendario">📅 Calendario</button>
+      <button data-modulo="pagos">💳 Pagos <span class="badge oculto" id="bPagos"></span></button>
+      <button data-modulo="productos">🍪 Productos</button>
+      <button data-modulo="inventario">📦 Inventario</button>
+      <button data-modulo="clientes">👥 Clientes</button>
+      <button data-modulo="reportes">📈 Reportes</button>
+      <button data-modulo="atencion">💬 Atención al cliente <span class="badge oculto" id="bMensajes"></span></button>
+      <button data-modulo="configuracion">⚙️ Pagos y domicilios</button>
+      <button id="btnTienda">🛍️ Ver la tienda</button>
+      <button class="oculto" id="btnInstalar">📲 Instalar app</button>
+      <button class="salir" id="btnSalir">↩ Cerrar sesión</button>
+    </nav>
+    <main class="principal">
+      <header><h1 id="tituloModulo" style="margin:0">Resumen</h1><span class="muted" id="nombreAdmin"></span></header>
+      <div id="contenido"></div>
+    </main>
+  </div>
+
+  <div class="modal oculto" id="modal" role="dialog" aria-modal="true" aria-label="Detalle">
+    <div class="caja ancha"><button class="cerrar" data-cerrar aria-label="Cerrar">×</button><div id="modalCuerpo"></div></div>
+  </div>
+
+  <script src="/js/comun.js"></script>
+  <script src="/js/admin.js"></script>
+  <script src="/js/pwa.js"></script>
+</body>
+</html>

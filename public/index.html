@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pecantojos · Galletas artesanales</title>
+  <link rel="icon" href="/img/logo.svg">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#D8577F">
+  <link rel="apple-touch-icon" href="/img/icons/icono-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Pecantojos">
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <header class="barra">
+    <div class="contenedor">
+      <a class="marca" href="#inicio"><img src="/img/logo.svg" alt="">Pecantojos</a>
+      <nav class="nav" aria-label="Principal">
+        <a href="#inicio" data-vista="inicio" class="texto-nav">Catálogo</a>
+        <a href="#pedidos" data-vista="pedidos">Mis pedidos</a>
+        <a href="#ayuda" data-vista="ayuda" class="texto-nav">Ayuda</a>
+        <button class="btn claro mini oculto" id="btnInstalar">Instalar app</button>
+        <button class="enlace" id="btnCuenta">Ingresar</button>
+        <button class="btn btn-carrito" id="btnCarrito" aria-label="Abrir carrito">🛒<span class="txt"> Carrito</span> <span class="contador" id="contador">0</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Inicio y catálogo ===== -->
+    <section data-seccion="inicio">
+      <div class="hero">
+        <div class="contenedor">
+          <div>
+            <h1>Galletas artesanales hechas con cariño en Medellín</h1>
+            <p>Elige tus favoritas, recíbelas en tu casa o recógelas en el local. Paga por Nequi, Daviplata, transferencia o en efectivo.</p>
+            <a href="#catalogo" class="btn">Ver catálogo</a>
+            <div class="beneficios"><span>🍪 Horneadas el día de entrega</span><span>🛵 Domicilio en el área metropolitana</span><span>📦 Seguimiento en línea</span></div>
+          </div>
+          <img class="hero-img" src="/img/productos/caja.svg" alt="Caja de galletas Pecantojos">
+        </div>
+      </div>
+      <div class="seccion" id="catalogo">
+        <div class="contenedor">
+          <div class="seccion-titulo">
+            <div><h2>Nuestro catálogo</h2><p class="muted" style="margin:0">Precios por unidad. La disponibilidad se actualiza en tiempo real.</p></div>
+            <div class="buscador"><input type="search" id="buscarProducto" placeholder="Buscar galletas…" aria-label="Buscar productos" autocomplete="off"><div class="filtros" id="filtros"></div></div>
+          </div>
+          <div class="grid-productos" id="productos"><p class="vacio">Cargando productos…</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Mis pedidos ===== -->
+    <section data-seccion="pedidos" class="seccion oculto">
+      <div class="contenedor">
+        <div class="seccion-titulo"><div><h2>Mis pedidos</h2><p class="muted" style="margin:0" id="saludo"></p></div>
+          <button class="btn borde mini" id="btnRecargarPedidos">Actualizar</button></div>
+        <div id="pedidosSinSesion" class="tarjeta vacio oculto">
+          <p>Inicia sesión para ver tus pedidos y en qué etapa va cada uno.</p>
+          <button class="btn" data-abrir-login>Ingresar o crear cuenta</button>
+        </div>
+        <div class="lista-pedidos" id="misPedidos"></div>
+      </div>
+    </section>
+
+    <!-- ===== Ayuda y atención al cliente ===== -->
+    <section data-seccion="ayuda" class="seccion oculto">
+      <div class="contenedor ayuda">
+        <div>
+          <h2>Atención al cliente</h2>
+          <p class="muted">Estamos para ayudarte <span id="horario"></span>.</p>
+          <a class="btn whatsapp" id="linkWhatsapp" target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
+          <h3 style="margin-top:1.5rem">Preguntas frecuentes</h3>
+          <div class="faq">
+            <details><summary>¿Con cuánta anticipación debo pedir?</summary><p>Puedes pedir para el mismo día, pero te recomendamos un día de anticipación para pedidos grandes.</p></details>
+            <details><summary>¿Cuánto cuesta el domicilio?</summary><div id="faqZonas"></div></details>
+            <details><summary>¿Cómo pago?</summary><p>Al confirmar el pedido verás los datos de la cuenta del método que elijas. Escribe el número de comprobante y lo confirmaremos en minutos. También puedes pagar en efectivo al recibir.</p></details>
+            <details><summary>¿Puedo cancelar un pedido?</summary><p>Sí, desde <em>Mis pedidos</em> mientras esté en estado <strong>Recibido</strong>. Después de pagado o en preparación, escríbenos.</p></details>
+          </div>
+        </div>
+        <div class="tarjeta">
+          <h3>Envíanos un mensaje</h3>
+          <div id="avisoSoporte"></div>
+          <form id="formSoporte">
+            <div class="fila">
+              <div class="campo"><label for="sNombre">Nombre</label><input id="sNombre" name="nombre" required></div>
+              <div class="campo"><label for="sCorreo">Correo</label><input id="sCorreo" name="correo" type="email" required></div>
+            </div>
+            <div class="fila">
+              <div class="campo"><label for="sAsunto">Asunto</label><input id="sAsunto" name="asunto" required></div>
+              <div class="campo"><label for="sPedido">Código de pedido (opcional)</label><input id="sPedido" name="codigoPedido" placeholder="PC-XXXXXX"></div>
+            </div>
+            <div class="campo"><label for="sMensaje">Mensaje</label><textarea id="sMensaje" name="mensaje" rows="5" required></textarea></div>
+            <button class="btn aqua" type="submit">Enviar mensaje</button>
+          </form>
+          <div id="misMensajes" style="margin-top:1rem"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie-pagina">
+    <div class="contenedor">
+      <strong>Pecantojos</strong> · Galletas artesanales · Medellín, Colombia<br>
+      <span class="chico">Proyecto académico — Universidad Católica Luis Amigó · <a href="/admin">Acceso administrativo</a></span>
+    </div>
+  </footer>
+
+  <!-- ===== Carrito ===== -->
+  <div class="velo oculto" id="velo"></div>
+  <aside class="panel oculto" id="panelCarrito" aria-label="Carrito de compras">
+    <header><h2 style="margin:0">Tu carrito</h2><button class="cerrar" data-cerrar-carrito aria-label="Cerrar">×</button></header>
+    <div class="contenido" id="lineasCarrito"></div>
+    <footer>
+      <div class="totales"><div><span>Subtotal</span><strong id="subtotalCarrito">$ 0</strong></div>
+        <div class="muted chico"><span>El domicilio se calcula en el siguiente paso</span></div></div>
+      <button class="btn bloque" id="btnPagar" disabled>Continuar con el pedido</button>
+    </footer>
+  </aside>
+
+  <!-- ===== Ingresar / crear cuenta ===== -->
+  <div class="modal oculto" id="modalLogin" role="dialog" aria-modal="true" aria-labelledby="tituloLogin">
+    <div class="caja">
+      <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+      <h2 id="tituloLogin">Ingresa a tu cuenta</h2>
+      <p class="muted">Necesitas una cuenta para hacer pedidos y ver su seguimiento.</p>
+      <div id="avisoLogin"></div>
+      <form id="formLogin">
+        <div class="campo"><label for="lCorreo">Correo o usuario</label><input id="lCorreo" name="correo" autocomplete="username" autocapitalize="none" required>
+          <span class="chico muted">Clientes: su correo. Equipo de Pecantojos: su usuario del panel.</span></div>
+        <div class="campo"><label for="lPass">Contraseña</label><input id="lPass" name="password" type="password" autocomplete="current-password" required></div>
+        <button class="btn bloque" type="submit">Ingresar</button>
+        <p class="chico muted" style="text-align:center">¿No tienes cuenta? <a href="#" id="irRegistro">Crea una aquí</a></p>
+      </form>
+      <form id="formRegistro" class="oculto">
+        <div class="campo"><label for="rNombre">Nombre completo</label><input id="rNombre" name="nombre" autocomplete="name" required></div>
+        <div class="fila">
+          <div class="campo"><label for="rCorreo">Correo</label><input id="rCorreo" name="correo" type="email" autocomplete="email" required></div>
+          <div class="campo"><label for="rTel">Celular</label><input id="rTel" name="telefono" inputmode="numeric" autocomplete="tel" required></div>
+        </div>
+        <div class="fila">
+          <div class="campo"><label for="rDir">Dirección (opcional)</label><input id="rDir" name="direccion" autocomplete="street-address"></div>
+          <div class="campo"><label for="rCiudad">Ciudad</label><input id="rCiudad" name="ciudad" value="Medellín"></div>
+        </div>
+        <div class="campo"><label for="rPass">Contraseña</label><input id="rPass" name="password" type="password" autocomplete="new-password" required>
+          <span class="chico muted">Mínimo 8 caracteres, con letras y números.</span></div>
+        <button class="btn bloque" type="submit">Crear cuenta</button>
+        <p class="chico muted" style="text-align:center">¿Ya tienes cuenta? <a href="#" id="irLogin">Ingresa</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Checkout ===== -->
+  <div class="modal oculto" id="modalCheckout" role="dialog" aria-modal="true" aria-labelledby="tituloCheckout">
+    <div class="caja">
+      <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+      <h2 id="tituloCheckout">Finalizar pedido</h2>
+      <div class="pasos-checkout"><span data-p="1"></span><span data-p="2"></span><span data-p="3"></span></div>
+      <div id="avisoCheckout"></div>
+
+      <form id="paso1">
+        <h3>1. ¿Cómo quieres recibirlo?</h3>
+        <div class="opciones">
+          <label class="opcion"><input type="radio" name="tipoEntrega" value="DOMICILIO" checked><span><strong>Domicilio</strong><br><span class="muted chico">Te lo llevamos a tu dirección</span></span></label>
+          <label class="opcion"><input type="radio" name="tipoEntrega" value="RECOGER"><span><strong>Recoger en el local</strong><br><span class="muted chico">Sin costo de domicilio</span></span></label>
+        </div>
+        <div id="camposDomicilio">
+          <div class="campo"><label for="cZona">Zona</label><select id="cZona" name="idZona"></select></div>
+          <div class="campo"><label for="cDir">Dirección de entrega</label><input id="cDir" name="direccionEntrega" placeholder="Calle, número, barrio, apartamento"></div>
+        </div>
+        <div class="fila">
+          <div class="campo"><label for="cFecha">Fecha de entrega</label><input id="cFecha" name="fechaEntrega" type="date" required></div>
+          <div class="campo"><label for="cObs">Observaciones (opcional)</label><input id="cObs" name="observaciones" placeholder="Ej.: es un regalo"></div>
+        </div>
+        <div class="totales tarjeta" id="resumenTotales"></div>
+        <button class="btn bloque" type="submit">Elegir método de pago</button>
+      </form>
+
+      <form id="paso2" class="oculto">
+        <h3>2. Método de pago</h3>
+        <div class="opciones" id="opcionesPago"></div>
+        <div class="datos-pago" id="datosPago"></div>
+        <div class="campo" id="campoReferencia"><label for="cRef">Número de comprobante</label>
+          <input id="cRef" name="referenciaPago" placeholder="Puedes escribirlo ahora o después desde Mis pedidos"></div>
+        <div class="totales tarjeta" id="resumenTotales2"></div>
+        <div class="fila"><button type="button" class="btn borde" id="volverPaso1">Volver</button><button class="btn" type="submit">Confirmar pedido</button></div>
+      </form>
+
+      <div id="paso3" class="oculto" style="text-align:center">
+        <div style="font-size:3rem">🎉</div>
+        <h3>¡Recibimos tu pedido!</h3>
+        <p>Tu código de seguimiento es</p>
+        <p class="codigo" style="font-size:1.6rem" id="codigoConfirmado"></p>
+        <p class="muted" id="mensajeConfirmado"></p>
+        <a href="#pedidos" class="btn aqua" data-cerrar>Ver mis pedidos</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Detalle de pedido ===== -->
+  <div class="modal oculto" id="modalPedido" role="dialog" aria-modal="true" aria-label="Detalle del pedido">
+    <div class="caja"><button class="cerrar" data-cerrar aria-label="Cerrar">×</button><div id="detallePedido"></div></div>
+  </div>
+
+  <script src="/js/comun.js"></script>
+  <script src="/js/tienda.js"></script>
+  <script src="/js/pwa.js"></script>
+</body>
+</html>

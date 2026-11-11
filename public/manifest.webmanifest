@@ -1,0 +1,16 @@
+{
+  "name": "Pecantojos · Galletas artesanales",
+  "short_name": "Pecantojos",
+  "description": "Pide tus galletas, paga y sigue tus pedidos.",
+  "lang": "es-CO",
+  "start_url": "/?origen=app",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FFF9FB",
+  "theme_color": "#D8577F",
+  "icons": [
+    { "src": "/img/icons/icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/img/icons/icono-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/img/icons/icono-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
